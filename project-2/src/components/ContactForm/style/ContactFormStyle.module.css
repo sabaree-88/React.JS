@@ -11,10 +11,13 @@
 }
 .info{
     width: 450px;
-    height: 540px;
+    height: 530px;
     background-color: #011C2B;
     border-radius: 8px;
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
 }
 
 .top_text h3{

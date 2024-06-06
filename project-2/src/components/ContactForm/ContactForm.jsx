@@ -16,17 +16,18 @@ const ContactForm = () => {
                         demo@gmail.com
                     </p>
                     <p className={style.address}>
-                        132 Dartmouth Street Boston, Massachusetts 02156 United States                    </p>
+                        132 Dartmouth Street Boston, Massachusetts 02156 United States
+                    </p>
                 </div>
                 <div className={style.social_links}>
                     <span className={style.links}>
-                        <i class="fa-brands fa-instagram"></i>
+                        <i className="fa-brands fa-instagram"></i>
                     </span>
                     <span className={style.links}>
-                    <i class="fa-brands fa-twitter"></i>
+                    <i className="fa-brands fa-twitter"></i>
                     </span>
                     <span className={style.links}>
-                    <i class="fa-brands fa-discord"></i>
+                    <i className="fa-brands fa-discord"></i>
                     </span>
                 </div>
             </div>
