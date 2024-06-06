@@ -29,3 +29,37 @@
     font-size: 18px;
     color: #C9C9C9;
 }
+
+.middle_text{
+    width: 337px;
+    height: 200px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.phone_number, .address, .mail{
+    font-family: "Poppins", sans-serif; 
+    font-weight: 400;
+    font-size: 16px;
+    color: #FFFFFF;
+}
+.social_links{
+    display: flex;
+    gap: 30px;
+}
+
+.social_links .links{
+    width: 30px;
+    height: 30px;
+    background: #F6AF03;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+.social_links .links i{
+    font-size: 20px;
+    color: #FFFFFF;
+}
