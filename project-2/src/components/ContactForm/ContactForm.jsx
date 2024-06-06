@@ -21,7 +21,7 @@ const ContactForm = () => {
                 </div>
                 <div className={style.social_links}>
                     <span className={style.links}>
-                        <i class="fa-brands fa-instagram"></i>
+                        <i className="fa-brands fa-instagram"></i>
                     </span>
                     <span className={style.links}>
                         <i class="fa-brands fa-twitter"></i>
