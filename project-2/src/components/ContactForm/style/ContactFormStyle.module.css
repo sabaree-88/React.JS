@@ -156,3 +156,9 @@
 .ml{
     margin-left: 2rem;
 }
+.text_red{
+    color: #94060d;
+    font-family: "Poppins", sans-serif; 
+    font-weight: 400;
+    font-size: 12px;
+}
