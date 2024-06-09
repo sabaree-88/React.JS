@@ -97,14 +97,20 @@ const Container = styled.div`
 `;
 
 const TopContainer = styled.section`
-max-width: 1200px;
-margin: 0 auto;
+    max-width: 1200px;
+    margin: 0 auto;
     min-height: 140px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
 
+   @media (max-width: 770px) and (min-width: 480px){
+      flex-wrap: wrap;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+   } 
     input{
       all: unset;
       width: 280px;
@@ -115,10 +121,11 @@ margin: 0 auto;
       font-weight: normal;
       font-size: 16px;
       color: #FFFFFF;
-    }
-    input::placeholder{
+      &::placeholder{
         color: #FFFFFF;
       }
+    }
+    
 `;
 
 const FilterContainer = styled.section`
