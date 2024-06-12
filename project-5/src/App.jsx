@@ -4,9 +4,20 @@ import Searchbar from "./components/Searchbar";
 import ContactCard from "./components/ContactCard";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./config/firebase";
+import Modal from "./components/Modal";
+import AddAndUpdateContact from "./components/AddAndUpdateContact";
 
 const App = () => {
   const [contacts, setContacts] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onOpen = () => {
+    setIsOpen(true);
+  };
+
+  const onClose = () => {
+    setIsOpen(false);
+  };
 
   useEffect(() => {
     const getContacts = async () => {
@@ -27,15 +38,18 @@ const App = () => {
     getContacts();
   }, []);
   return (
-    <div className="mx-auto max-w-[480px] px-4">
-      <Navbar />
-      <Searchbar />
-      <div className="mt-4 flex flex-col gap-4">
-        {contacts.map((contact) => (
-          <ContactCard key={contact.id} contact={contact}/>
-        ))}
+    <>
+      <div className="mx-auto max-w-[480px] px-4">
+        <Navbar />
+        <Searchbar onOpen={onOpen} />
+        <div className="mt-4 flex flex-col gap-4">
+          {contacts.map((contact) => (
+            <ContactCard key={contact.id} contact={contact} />
+          ))}
+        </div>
       </div>
-    </div>
+      <AddAndUpdateContact onClose={onClose} isOpen={isOpen} />
+    </>
   );
 };
 
