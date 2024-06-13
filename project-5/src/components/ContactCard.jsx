@@ -1,25 +1,44 @@
 import { FaTrashAlt } from "react-icons/fa";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { TbEditCircle } from "react-icons/tb";
+import useDisclose from "../hooks/useDisclose";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "../config/firebase";
+import AddAndUpdateContact from "./AddAndUpdateContact";
 
-const ContactCard = ({contact}) => {
+const ContactCard = ({ contact }) => {
+  const { isOpen, onClose, onOpen } = useDisclose();
+
+  const deleteContact = async (id) => {
+    try {
+      await deleteDoc(doc(db, "contact", id));
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
-    <div
-      key={contact.id}
-      className="flex justify-between items-center p-2 rounded-lg bg-yellow"
-    >
-      <div className="flex gap-1">
-        <FaRegCircleUser className="text-orange text-4xl" />
-        <div className="">
-          <h2 className="font-medium">{contact.name}</h2>
-          <p className="text-sm">{contact.email}</p>
+    <>
+      <div
+        key={contact.id}
+        className="flex justify-between items-center p-2 rounded-lg bg-yellow"
+      >
+        <div className="flex gap-1">
+          <FaRegCircleUser className="text-orange text-4xl" />
+          <div className="">
+            <h2 className="font-medium">{contact.name}</h2>
+            <p className="text-sm">{contact.email}</p>
+          </div>
+        </div>
+        <div className="flex gap-2 text-3xl">
+          <TbEditCircle onClick={onOpen} className="cursor-pointer" />
+          <FaTrashAlt
+            className="text-orange cursor-pointer"
+            onClick={() => deleteContact(contact.id)}
+          />
         </div>
       </div>
-      <div className="flex gap-2 text-3xl">
-        <TbEditCircle />
-        <FaTrashAlt className="text-orange" />
-      </div>
-    </div>
+      <AddAndUpdateContact contact isUpdate isOpen={isOpen} onClose={onClose} />
+    </>
   );
 };
 
