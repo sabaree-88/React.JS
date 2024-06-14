@@ -5,6 +5,7 @@ import useDisclose from "../hooks/useDisclose";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../config/firebase";
 import AddAndUpdateContact from "./AddAndUpdateContact";
+import { toast } from "react-toastify";
 
 const ContactCard = ({ contact }) => {
   const { isOpen, onClose, onOpen } = useDisclose();
@@ -12,6 +13,7 @@ const ContactCard = ({ contact }) => {
   const deleteContact = async (id) => {
     try {
       await deleteDoc(doc(db, "contact", id));
+      toast.success("Contact deleted successfully");
     } catch (error) {
       console.error(error);
     }
@@ -37,7 +39,7 @@ const ContactCard = ({ contact }) => {
           />
         </div>
       </div>
-      <AddAndUpdateContact contact isUpdate isOpen={isOpen} onClose={onClose} />
+      <AddAndUpdateContact contact={contact} isUpdate isOpen={isOpen} onClose={onClose} />
     </>
   );
 };
