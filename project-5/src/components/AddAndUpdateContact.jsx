@@ -36,18 +36,12 @@ const AddAndUpdateContact = ({ isUpdate, isOpen, onClose, contact }) => {
           validationSchema={contactSchemaValidation}
           initialValues={
             isUpdate
-              ? {
-                  name: contact.name,
-                  email: contact.email,
-                }
-              : {
-                  name: "",
-                  email: "",
-                }
+              ? { name: contact.name, email: contact.email }
+              : { name: "", email: "" }
           }
-          onSubmit={(values) => {
-            // console.log(values);
+          onSubmit={(values, { setSubmitting }) => {
             isUpdate ? updateContact(values, contact.id) : addContact(values);
+            setSubmitting(false);
           }}
         >
           <Form className="flex flex-col gap-4">
