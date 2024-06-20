@@ -12,16 +12,16 @@ const User = {
     });
   },
 
-  // saveUsers: (values, create) => {
-  //   const values = [req.body.name, req.body.email];
-  //   const sql = 'INSERT INTO data (name, email) VALUES (?, ?)';
-  //   db.query(sql, [values], (err, result) => {
-  //     if (err) {
-  //       return create(err, null);
-  //     }
-  //     return create(null, result);
-  //   });
-  // }
+  saveUsers: (values, create) => {
+    const sql = "INSERT INTO data (name, email) VALUES (?)";
+    const values = this.values;
+    db.query(sql, values, (err, result) => {
+      if (err) {
+        return create(err, null);
+      }
+      return create(null, result);
+    });
+  },
 };
 
 module.exports = User;
