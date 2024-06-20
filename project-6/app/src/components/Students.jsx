@@ -1,19 +1,19 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Students = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:8081/user")
-      .then((res) => res.json())
-      .then((data) => setData(data))
+    axios.get("http://localhost:8081")
+      .then((res) => setData(res.data))
       .catch((error) => console.error(error));
   }, []);
   return (
     <>
       <div className="flex justify-center items-center bg-stone-900 h-[100vh] w-full">
-        <div className="w-1/2 bg-white rounded-sm h-[50vh] p-5">
-          <Link className="bg-green-500 px-4 py-2 rounded-md text-white text-xl align-middle">
+        <div className="w-1/2 bg-white rounded-sm min-h-[50vh] p-5">
+          <Link to="/create" className="bg-green-500 px-4 py-2 rounded-md text-white text-xl align-middle">
             Add Student
           </Link>
 

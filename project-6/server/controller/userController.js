@@ -9,6 +9,19 @@ const getUsers = (req, res) => {
   });
 };
 
+// const saveUsers = (req, res) => {
+//   const values = [req.body.name, req.body.email];
+
+//   User.saveUsers(values, (err, data) => {
+//     if (err) {
+//       console.error("Error saving the user:", err);
+//       return res.status(500).json("Error saving the user");
+//     }
+//     return res.json(data);
+//   });
+// };
+
 module.exports = {
   getUsers,
+  // saveUsers,
 };
