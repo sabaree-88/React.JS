@@ -1,13 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Students = () => {
-  useEffect(()=>{
+  const [data, setData] = useState([]);
+  useEffect(() => {
     fetch("http://localhost:8081/user")
-    .then((res)=> res)
-    .then((data) => data.json())
-    .catch(err => console.error(err))
-  },[])
+      .then((res) => res.json())
+      .then((data) => setData(data))
+      .catch((error) => console.error(error));
+  }, []);
   return (
     <>
       <div className="flex justify-center items-center bg-stone-900 h-[100vh] w-full">
@@ -35,9 +36,27 @@ const Students = () => {
                 </tr>
               </thead>
               <tbody>
-                {
-
-                }
+                {data.map((item, i) => (
+                  <tr key={i}>
+                    <td scope="col" className="px-6 py-3">
+                      {item.id}
+                    </td>
+                    <td scope="col" className="px-6 py-3">
+                      {item.name}
+                    </td>
+                    <td scope="col" className="px-6 py-3">
+                      {item.email}
+                    </td>
+                    <td scope="col" className="px-6 py-3">
+                      <button className="bg-yellow-500 text-white px-2 py-1 m-1 rounded-sm">
+                        Edit
+                      </button>
+                      <button className="bg-red-500 text-white px-2 py-1 m-1 rounded-sm">
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
