@@ -13,13 +13,22 @@ const User = {
   },
 
   saveUsers: (values, create) => {
-    const sql = "INSERT INTO data (name, email) VALUES (?)";
-    const values = this.values;
+    const sql = "INSERT INTO data (name, email) VALUES (?,?)";
     db.query(sql, values, (err, result) => {
       if (err) {
         return create(err, null);
       }
       return create(null, result);
+    });
+  },
+  updateUser: (values, id, update) => {
+    const sql = "UPDATE data SET name = ?, email = ? WHERE id = ?";
+    db.query(sql, [...values, id], (err, result) => {
+      if (err) {
+        console.error("Error updating the user:", err);
+        return update(err, null);
+      }
+      return update(null, result);
     });
   },
 };

@@ -21,7 +21,20 @@ const saveUsers = (req, res) => {
   });
 };
 
+const updateUser = (req, res) => {
+  const id = req.params.id;
+  const values = [req.body.name, req.body.email];
+
+  User.updateUser(values, id, (err, data) => {
+    if (err) {
+      console.error("Error updating the user:", err);
+      return res.status(500).json({ message: "Error updating the user" });
+    }
+    return res.status(200).json(data);
+  });
+};
 module.exports = {
   getUsers,
   saveUsers,
+  updateUser,
 };

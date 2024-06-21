@@ -1,25 +1,44 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const CreateStudent = () => {
+const UpdateUser = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  useEffect(() => {
+    axios.get(`http://localhost:8081/user/${id}`)
+      .then((res) => {
+        const { name, email } = res.data;
+        setName(name);
+        setEmail(email);
+      })
+      .catch((err) => {
+        console.error("Error fetching user data:", err);
+        setError("Error fetching user data");
+      });
+  }, [id]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post("http://localhost:8081/user", { name, email })
-      .then((res) => {
-        console.log(res);
+    axios
+      .put(`http://localhost:8081/user/${id}`, { name, email }) // Ensure correct endpoint
+      .then(() => {
         navigate("/");
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error("Error updating user:", err);
+        setError("Error updating user");
+      });
   };
 
   return (
     <div className="flex justify-center items-center w-full min-h-[100vh] bg-gray-900">
-      <div className="w-1/2 bg-white h-[300px] p-8">
+      <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
+        {error && <p className="text-red-500">{error}</p>}
         <form className="max-w-sm mx-auto" onSubmit={handleSubmit}>
           <div className="mb-5">
             <label
@@ -34,8 +53,7 @@ const CreateStudent = () => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Sabareesh"
               required
-              name="name"
-
+              value={name}
               onChange={(e) => setName(e.target.value)}
             />
           </div>
@@ -52,7 +70,7 @@ const CreateStudent = () => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="sabareesh@company.com"
               required
-              name="email"
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -60,7 +78,7 @@ const CreateStudent = () => {
             type="submit"
             className="text-white bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
-            Submit
+            Update
           </button>
         </form>
       </div>
@@ -68,4 +86,4 @@ const CreateStudent = () => {
   );
 };
 
-export default CreateStudent;
+export default UpdateUser;

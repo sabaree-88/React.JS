@@ -48,9 +48,9 @@ const Students = () => {
                       {item.email}
                     </td>
                     <td scope="col" className="px-6 py-3">
-                      <button className="bg-yellow-500 text-white px-2 py-1 m-1 rounded-sm">
+                      <Link to={`update/${item.id}`} className="bg-yellow-500 text-white px-2 py-1 m-1 rounded-sm">
                         Edit
-                      </button>
+                      </Link>
                       <button className="bg-red-500 text-white px-2 py-1 m-1 rounded-sm">
                         Delete
                       </button>
