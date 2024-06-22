@@ -31,6 +31,17 @@ const User = {
       return update(null, result);
     });
   },
+
+  deleteUser: (id, del) => {
+    const sql = "DELETE FROM data WHERE id = ?";
+    db.query(sql, [id], (err, result) => {
+      if (err) {
+        console.error("Error deleting the user:", err);
+        return del(err, null);
+      }
+      return del(null, result);
+    });
+  },
 };
 
 module.exports = User;

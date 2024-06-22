@@ -25,7 +25,7 @@ const UpdateUser = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .put(`http://localhost:8081/user/${id}`, { name, email }) // Ensure correct endpoint
+      .put(`http://localhost:8081/user/${id}`, { name, email })
       .then(() => {
         navigate("/");
       })
