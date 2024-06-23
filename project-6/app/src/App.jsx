@@ -1,19 +1,17 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Students from "./components/Students";
-import CreateStudent from "./components/CreateStudent";
-import UpdateUser from "./components/UpdateUser";
-function App() {
+import CreateStudent from "./components/CreateStudent"; // Import the combined form component
+
+const App = () => {
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Students />}></Route>
-          <Route path="/create" element={<CreateStudent />}></Route>
-          <Route path="/update/:id" element={<UpdateUser />}></Route>
-        </Routes>
-      </BrowserRouter>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Students />} />
+        <Route path="/create" element={<CreateStudent />} />
+        <Route path="/update/:id" element={<CreateStudent />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
