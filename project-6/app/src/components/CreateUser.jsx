@@ -30,7 +30,6 @@ const CreateUser = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setLoading(true);
     const request = id
       ? axios.put(`http://localhost:8081/user/${id}`, { name, email })
       : axios.post("http://localhost:8081/user", { name, email });

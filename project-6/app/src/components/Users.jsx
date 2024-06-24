@@ -21,8 +21,8 @@ const Users = () => {
   };
   return (
     <>
-      <div className="flex justify-center items-center bg-stone-900 h-[100vh] w-full">
-        <div className="w-1/2 bg-white rounded-sm min-h-[50vh] p-5">
+      <div className="flex justify-center items-center bg-stone-900 min-h-[100vh] w-full ">
+        <div className="w-1/2 bg-white rounded-sm min-h-[50vh] p-5 mt-16 mb-16">
           <Link
             to="/create"
             className="bg-green-500 px-4 py-2 rounded-md text-white text-xl align-middle"
@@ -50,17 +50,17 @@ const Users = () => {
               </thead>
               <tbody>
                 {data.map((item, i) => (
-                  <tr key={i}>
-                    <td scope="col" className="px-6 py-3">
+                  <tr key={i} className="border-b">
+                    <td scope="col" className="px-6 py-2">
                       {item.id}
                     </td>
-                    <td scope="col" className="px-6 py-3">
+                    <td scope="col" className="px-6 py-2">
                       {item.name}
                     </td>
-                    <td scope="col" className="px-6 py-3">
+                    <td scope="col" className="px-6 py-2">
                       {item.email}
                     </td>
-                    <td scope="col" className="px-6 py-3">
+                    <td scope="col" className="px-6 py-2">
                       <Link
                         to={`update/${item.id}`}
                         className="bg-yellow-500 text-white px-2 py-1 m-1 rounded-sm"
