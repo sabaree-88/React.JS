@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Students = () => {
+const Users = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
@@ -85,4 +85,4 @@ const Students = () => {
   );
 };
 
-export default Students;
+export default Users;

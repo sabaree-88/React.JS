@@ -31,7 +31,16 @@ const User = {
       return update(null, result);
     });
   },
-
+  getUserById: (id, show) => {
+    const sql = "SELECT * FROM data WHERE id = ?";
+    db.query(sql, [id], (err, result) => {
+      if (err) {
+        console.error("Error fetching user by ID:", err);
+        return show(err, null);
+      }
+      return show(null, result);
+    });
+  },
   deleteUser: (id, del) => {
     const sql = "DELETE FROM data WHERE id = ?";
     db.query(sql, [id], (err, result) => {

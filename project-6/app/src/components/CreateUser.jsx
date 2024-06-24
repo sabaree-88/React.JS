@@ -2,29 +2,28 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
-const CreateStudent = () => {
+const CreateUser = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
     if (id) {
-      setLoading(true);
       axios
         .get(`http://localhost:8081/user/${id}`)
         .then((res) => {
           const { name, email } = res.data;
-          setName(name || "");
-          setEmail(email || "");
-          setLoading(false);
+          setName(name);
+          setEmail(email);
         })
         .catch((err) => {
           console.error("Error fetching user data:", err);
-          setError("Error fetching user data: " + (err.response?.data?.message || err.message));
-          setLoading(false);
+          setError(
+            "Error fetching user data: " +
+              (err.response?.data?.message || err.message)
+          );
         });
     }
   }, [id]);
@@ -42,16 +41,12 @@ const CreateStudent = () => {
       })
       .catch((err) => {
         console.error("Error submitting form:", err);
-        setError("Error submitting form: " + (err.response?.data?.message || err.message));
-      })
-      .finally(() => {
-        setLoading(false);
+        setError(
+          "Error submitting form: " +
+            (err.response?.data?.message || err.message)
+        );
       });
   };
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
 
   return (
     <div className="flex justify-center items-center w-full min-h-[100vh] bg-gray-900">
@@ -104,4 +99,4 @@ const CreateStudent = () => {
   );
 };
 
-export default CreateStudent;
+export default CreateUser;

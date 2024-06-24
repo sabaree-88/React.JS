@@ -10,10 +10,7 @@ app.use(express.json());
 app.get("/", userRoutes);
 
 app.use("/user", userRoutes);
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send({ message: "Internal Server Error" });
-});
+
 const PORT = 8081;
 
 app.listen(PORT, () => {

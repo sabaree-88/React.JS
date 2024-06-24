@@ -33,7 +33,20 @@ const updateUser = (req, res) => {
     return res.status(200).json(data);
   });
 };
+const getUserById = (req, res) => {
+  const id = req.params.id;
 
+  User.getUserById(id, (err, data) => {
+    if (err) {
+      console.error("Error fetching user by ID:", err);
+      return res.status(500).json("Error fetching user by ID");
+    }
+    if (data.length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    return res.status(200).json(data[0]);
+  });
+};
 const deleteUser = (req, res) => {
   const id = req.params.id;
 
@@ -52,5 +65,6 @@ module.exports = {
   getUsers,
   saveUsers,
   updateUser,
+  getUserById,
   deleteUser,
 };
